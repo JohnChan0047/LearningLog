@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ topic }}
+{% endblock %}
+{% block content %}
+    <p>
+        <h2>Topic: {{ topic.name }}</h2>
+    </p>
+    <p>
+        Entries:
+    </p>
+    <p>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加内容</a>
+    </p>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <p>{{ entry.add_time|date:'M d, Y H:i' }}</p>
+                <p>{{ entry.text|linebreaks }}</p>
+            </li>
+        {% empty %}
+            <li>还没添加</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
