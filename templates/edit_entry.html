@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    修改内容
+{% endblock %}
+{% block content %}
+    <P>
+        <a href="{% url 'learning_logs:topic' topic.id %}">
+            {{ topic.name }}
+        </a>
+    </P>
+    <p>修改内容：</p>
+    <form action="{% url 'learning_logs:edit_entry' entry.id %}" name="edit" method="post">
+        {% csrf_token %}
+        {{ entry_form.as_p }}
+        <button name="submit">保存</button>
+    </form>
+{% endblock %}

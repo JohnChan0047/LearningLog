@@ -20,6 +20,10 @@ import xadmin
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    #配置主页显示的url
+
+    # 配置主页显示的url
     url(r'', include('learning_logs.urls', namespace='learning_logs')),
+
+    # 用户相关url
+    url(r'^user/', include('users.urls', namespace='user')),
 ]

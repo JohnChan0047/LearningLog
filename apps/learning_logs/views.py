@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.views.generic.base import View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
-
-# Create your views here.
+from apps.utils.mixin_utils import LoginRequiredMixin
 
 
 class IndexView(View):
@@ -15,17 +14,19 @@ class IndexView(View):
         return render(request, 'index.html', {})
 
 
-class TopicsView(View):
+class TopicsView(LoginRequiredMixin, View):
     def get(self, request):
-        topics = Topic.objects.all().order_by('add_time')
+        topics = Topic.objects.filter(user=request.user).order_by('add_time')
         return render(request, 'topics.html', {
             'topics': topics,
         })
 
 
-class TopicView(View):
+class TopicView(LoginRequiredMixin, View):
     def get(self, request, topic_id):
         topic = Topic.objects.get(id=topic_id)
+        if topic.user != request.user:
+            raise Http404
         entries = Entry.objects.filter(topic=topic).order_by('-add_time')
         return render(request, 'topic.html', {
             'topic': topic,
@@ -33,7 +34,7 @@ class TopicView(View):
         })
 
 
-class AddNewTopicView(View):
+class AddNewTopicView(LoginRequiredMixin, View):
     def get(self, request):
         topic_form = TopicForm
         return render(request, 'new_topic.html', {
@@ -43,7 +44,9 @@ class AddNewTopicView(View):
     def post(self, request):
         topic_form = TopicForm(request.POST)
         if topic_form.is_valid():
-            topic_form.save()
+            new_topic = topic_form.save(commit=False)
+            new_topic.user = request.user
+            new_topic.save()
             return HttpResponseRedirect(reverse('learning_logs:topics'))
         else:
             return render(request, 'new_topic.html', {
@@ -51,7 +54,7 @@ class AddNewTopicView(View):
             })
 
 
-class AddNewEntryView(View):
+class AddNewEntryView(LoginRequiredMixin, View):
     def get(self, request, topic_id):
         entry_form = EntryForm
         topic = Topic.objects.get(id=topic_id)
@@ -70,6 +73,36 @@ class AddNewEntryView(View):
             return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic_id]))
         else:
             return render(request, 'new_entry.html', {
+                'entry_form': entry_form,
+                'topic': topic,
+            })
+
+
+class EditEntryView(LoginRequiredMixin, View):
+    def get(self, request, entry_id):
+        entry = Entry.objects.get(id=entry_id)
+        topic = entry.topic
+        if topic.user != request.user:
+            raise Http404
+        entry_form = EntryForm(instance=entry)
+        return render(request, 'edit_entry.html', {
+            'entry': entry,
+            'entry_form': entry_form,
+            'topic': topic,
+        })
+
+    def post(self, request, entry_id):
+        entry = Entry.objects.get(id=entry_id)
+        topic = entry.topic
+        if topic.user != request.user:
+            raise Http404
+        entry_form = EntryForm(instance=entry, data=request.POST)
+        if entry_form.is_valid():
+            entry_form.save()
+            return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
+        else:
+            return render(request, 'edit_entry.html', {
+                'entry': entry,
                 'entry_form': entry_form,
                 'topic': topic,
             })
