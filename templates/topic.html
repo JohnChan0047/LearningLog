@@ -10,17 +10,17 @@
         Entries:
     </p>
     <p>
-        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加内容</a>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">Add Entry</a>
     </p>
     <ul>
         {% for entry in entries %}
             <li>
                 <p>{{ entry.add_time|date:'M d, Y H:i' }}</p>
                 <p>{{ entry.text|linebreaks }}</p>
-                <P><a href="{% url 'learning_logs:edit_entry' entry.id %}">修改</a></P>
+                <P><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></P>
             </li>
         {% empty %}
-            <li>还没添加</li>
+            <li>Not add anything yet.</li>
         {% endfor %}
     </ul>
 {% endblock %}

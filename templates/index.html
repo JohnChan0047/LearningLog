@@ -2,8 +2,17 @@
 {% block title %}
     主页
 {% endblock %}
+{% block header %}
+    <div class="jumbotron">
+        <h1>Track your learning.</h1>
+    </div>
+{% endblock %}
 {% block content %}
-    <P>
-        <h1>记录学习心得。</h1>
-    </P>
+    <h2>
+        <a href="{% url 'user:register' %}">Register an account</a> to make your own Learning Log, and list the
+     topics you're learning about.
+    </h2>
+    <h2>
+        Whenever you learn something about a new topic, make an entry summarizing what you've learned.
+    </h2>
 {% endblock %}

@@ -9,12 +9,12 @@ from users.models import UserProfile
 
 class Topic(models.Model):
 
-    name = models.CharField(max_length=10, verbose_name='主题')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    name = models.CharField(max_length=10, verbose_name='Topic')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='add time')
     user = models.ForeignKey(UserProfile, verbose_name='作者')
 
     class Meta:
-        verbose_name = '主题'
+        verbose_name = 'Topic'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -23,11 +23,11 @@ class Topic(models.Model):
 
 class Entry(models.Model):
     topic = models.ForeignKey(Topic, verbose_name='主题')
-    text = models.TextField(verbose_name='内容')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+    text = models.TextField(verbose_name='Entry')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='add time')
 
     class Meta:
-        verbose_name = '内容'
+        verbose_name = 'Entry'
         verbose_name_plural = verbose_name
 
     def __str__(self):

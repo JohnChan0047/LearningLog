@@ -2,20 +2,31 @@
 {% block title %}
     登录
 {% endblock %}
+{% block header %}
+    <h2>
+        Log in to your account.
+    </h2>
+{% endblock %}
 {% block content %}
     {% if request.user.is_authenticated %}
-        <p>您已经登录！</p>
+        <div class="alert alert-success" role="alert">
+            <p>You are already logged in!</p>
+        </div>
     {% else %}
-        <p>用户登陆</p>
-        {% if loginform.errors %}
-            <P>{{ loginform.errors }}</P>
+        {% if message %}
+        <div class="alert alert-danger" role="alert">
+            <h2>
+                <P>{{ message }}</P>
+            </h2>
+        </div>
         {% endif %}
-        {{ message }}
-         <form action="{% url 'user:login' %}" method="post">
+         <form action="{% url 'user:login' %}" method="post" class="form">
             {% csrf_token %}
-            <p><label for="id_username">用户名: </label> <input type="text" name="username" required id="id_username" /></p>
-            <p><label for="id_password">密码: </label> <input type="password" name="password" minlength="6" required id="id_password" /></p>
-            <button name="submit">登录</button>
+            <p><label for="id_username">Username: </label>
+                <input type="text" name="username" required id="id_username" class="form-control"/></p>
+            <p><label for="id_password">Password: </label>
+                <input type="password" name="password" minlength="6" required id="id_password" class="form-control"/></p>
+            <button name="submit" class="btn btn-primary">Login</button>
         </form>
     {% endif %}
 {% endblock %}

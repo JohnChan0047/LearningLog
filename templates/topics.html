@@ -4,16 +4,16 @@
 {% endblock %}
 {% block content %}
     <p>
-        <h2>主题</h2>
+        <h2>Topics</h2>
     </p>
     <p>
-        <a href="{% url 'learning_logs:new_topic' %}">添加主题</a>
+        <a href="{% url 'learning_logs:new_topic' %}">Add topic</a>
     </p>
     <ul>
         {% for topic in topics %}
             <li><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></li>
         {% empty %}
-            <li>还没添加</li>
+            <li>Not add anything yet</li>
         {% endfor %}
     </ul>
 

@@ -4,9 +4,13 @@
 {% endblock %}
 {% block content %}
     {% if request.user.is_authenticated %}
-        <p>您已经登录！请先退出登陆再注册！</p>
+        <h2>
+        <p>You are already logged in! Please exit first and sign up again!</p>
+        </h2>
     {% else %}
-        <p>用户注册</p>
+        <h2>
+            <p>Register</p>
+        </h2>
         {% if register_form.errors %}
             {{ register_form.errors }}
         {% endif %}
@@ -15,7 +19,7 @@
             <p><label for="id_username">用户名: </label> <input placeholder="请输入用户名" type="text" name="username" required id="id_username" /></p>
             <p><label for="id_password">密码: </label> <input placeholder="请输入密码" type="password" name="password" required id="id_password" /></p>
             {% csrf_token %}
-            <button name="submit">注册</button>
+            <button name="submit">Register</button>
         </form>
     {% endif %}
 {% endblock %}

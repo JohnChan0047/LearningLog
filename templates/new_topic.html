@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}
-    添加新主题
+    Add a new topic
+{% endblock %}
+{% block header %}
+    <h2>
+        Add a new topic:
+    </h2>
 {% endblock %}
 {% block content %}
-    <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post">
+    <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post" class="form">
         {% csrf_token %}
-        {{ topic_form.as_p }}
-        <button name="submit">添加</button>
+        <p><label >Topic: </label>
+        <input class="form" type="text" name="topic">
+        <button name="submit" class="btn btn-primary">add topic</button>
     </form>
 {% endblock %}
