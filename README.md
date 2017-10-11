@@ -1,8 +1,10 @@
 # LearningLog
 一个简单的学习笔记系统。  
 1、采用xadmin作为后台管理系统：
-pip install git+git://github.com/sshwsfc/xadmin.git  
-2、完成了基本的注册、登陆、添加修改主题、添加修改内容等功能（可以改进的方向：添加注册验证码与邮箱验证、页面分页、CSS样式等）
+pip install git+git://github.com/sshwsfc/xadmin.git; 
+2、完成了基本的注册、登陆、添加修改主题、添加修改内容等功能;  
+3、添加bootstrap的前端样式框架
+4、测试管理员账号：ccc;密码:qwerty123；后台地址:http://127.0.0.1:8000/xadmin  
 # 需要安装的包  
 diff-match-patch (20121119)  
 Django (1.11.6)  
