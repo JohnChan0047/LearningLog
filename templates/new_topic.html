@@ -2,16 +2,24 @@
 {% block title %}
     Add a new topic
 {% endblock %}
+{% block custom_js %}
+    <style>
+        .form {
+            width: 200px;
+        }
+    </style>
+{% endblock %}
 {% block header %}
     <h2>
         Add a new topic:
     </h2>
 {% endblock %}
 {% block content %}
-    <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post" class="form">
+    <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post">
         {% csrf_token %}
-        <p><label >Topic: </label>
-        <input class="form" type="text" name="topic">
+        <p>
+            <label >New Topic: </label><input class="form form-control" type="text" name="topic">
+        </p>
         <button name="submit" class="btn btn-primary">add topic</button>
     </form>
 {% endblock %}

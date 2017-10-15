@@ -2,16 +2,32 @@
 {% block title %}
     Edit Entry
 {% endblock %}
+{% block custom_js %}
+        <script>
+            function mytime(){
+                var a = new Date();
+                var b = a.toLocaleString();
+                document.getElementById("time1").innerHTML = "&nbsp"+b;
+                }
+            setInterval(function() {mytime()},1000);
+        </script>
+{% endblock %}
 {% block content %}
     <P>
         <a href="{% url 'learning_logs:topic' topic.id %}">
-            {{ topic.name }}
+            <h2>{{ topic.name }}</h2>
         </a>
     </P>
-    <p>Modify：</p>
+    <label>Modify：</label>
     <form action="{% url 'learning_logs:edit_entry' entry.id %}" name="edit" method="post">
         {% csrf_token %}
-        {{ entry_form.as_p }}
-        <button name="submit">save</button>
+        <p>
+            <textarea name="text" cols="120" rows="10" required="" id="id_text" class="form-control">{{ entry.text }}</textarea>
+        </p>
+        <p>
+            <label>Add time:</label>
+            <p id="time1"></p>
+        </p>
+        <button name="submit" class="btn btn-primary">save</button>
     </form>
 {% endblock %}

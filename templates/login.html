@@ -23,9 +23,11 @@
          <form action="{% url 'user:login' %}" method="post" class="form">
             {% csrf_token %}
             <p><label for="id_username">Username: </label>
-                <input type="text" name="username" required id="id_username" class="form-control"/></p>
+                <input type="text" name="username" required id="id_username" class="form-control"/>
+            </p>
             <p><label for="id_password">Password: </label>
-                <input type="password" name="password" minlength="6" required id="id_password" class="form-control"/></p>
+                <input type="password" name="password" minlength="6" required id="id_password" class="form-control"/>
+            </p>
             <button name="submit" class="btn btn-primary">Login</button>
         </form>
     {% endif %}

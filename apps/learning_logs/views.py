@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
-
+from datetime import datetime
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm

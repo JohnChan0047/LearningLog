@@ -2,6 +2,16 @@
 {% block title %}
     Add a new entry:
 {% endblock %}
+{% block custom_js %}
+        <script>
+            function mytime(){
+                var a = new Date();
+                var b = a.toLocaleString();
+                document.getElementById("time1").innerHTML = "&nbsp"+b;
+                }
+            setInterval(function() {mytime()},1000);
+        </script>
+{% endblock %}
 {% block header %}
     <h2>
         Add a new entry:
@@ -9,11 +19,20 @@
 {% endblock %}
 {% block content %}
     <p>
-    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        <h3>
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        </h3>
     </p>
     <form name="entry" action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
         {% csrf_token %}
-        {{ entry_form.as_p }}
-        <button name="submit">Add a new entry:</button>
+        <p>
+            <label for="id_text">Entry:</label>
+            <textarea name="text" cols="120" rows="10" required="" id="id_text" class="form-control"></textarea>
+        </p>
+        <p>
+            <label>Add time:</label>
+            <p id="time1"></p>
+        </p>
+        <button name="submit" class="btn btn-primary">Add a new entry:</button>
     </form>
 {% endblock %}
