@@ -4,7 +4,7 @@
 pip install git+git://github.com/sshwsfc/xadmin.git; 
 2、完成了基本的注册、登陆、添加修改主题、添加修改内容等功能;  
 3、添加bootstrap的前端样式框架
-4、测试管理员账号：ccc;密码:qwerty123；后台地址:http://127.0.0.1:8000/xadmin  
+4、测试管理员账号：ddd;密码:qwerty123；后台地址:http://127.0.0.1:8000/xadmin  
 # 需要安装的包  
 diff-match-patch (20121119)  
 Django (1.11.6)  
