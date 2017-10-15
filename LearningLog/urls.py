@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.views.static import serve
 from .settings import MEDIA_ROOT
 import xadmin
+from apps.learning_logs.upload import upload_image
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -29,5 +30,9 @@ urlpatterns = [
     url(r'^user/', include('users.urls', namespace='user')),
 
     # media配置
-    url(r'^media/(?P<path>.*)/$', serve, {"document_root": MEDIA_ROOT})
+    url(r'^media/(?P<path>.*)/$', serve, {"document_root": MEDIA_ROOT}),
+
+    # 配置kindeditor上传
+    url(r'^uploads/(?P<dir_name>[^/]+)$', upload_image, name='upload_image'),
 ]
+

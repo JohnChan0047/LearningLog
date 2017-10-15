@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}
     Edit Entry
 {% endblock %}
 {% block custom_js %}
-        <script>
-            function mytime(){
-                var a = new Date();
-                var b = a.toLocaleString();
-                document.getElementById("time1").innerHTML = "&nbsp"+b;
-                }
-            setInterval(function() {mytime()},1000);
-        </script>
+    <script>
+        function mytime(){
+            var a = new Date();
+            var b = a.toLocaleString();
+            document.getElementById("time1").innerHTML = "&nbsp"+b;
+            }
+        setInterval(function() {mytime()},1000);
+    </script>
+    <script charset="utf-8" src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+    <script charset="utf-8" src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+    <script charset="utf-8" src="{% static 'js/kindeditor/config.js' %}"></script>
 {% endblock %}
 {% block content %}
     <P>

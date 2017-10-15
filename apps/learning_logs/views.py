@@ -42,7 +42,7 @@ class AddNewTopicView(LoginRequiredMixin, View):
         })
 
     def post(self, request):
-        topic_form = TopicForm(request.POST)
+        topic_form = TopicForm({'name': request.POST.get('topic', '')})
         if topic_form.is_valid():
             new_topic = topic_form.save(commit=False)
             new_topic.user = request.user
