@@ -17,11 +17,6 @@
     <script charset="utf-8" src="{% static 'js/kindeditor/config.js' %}"></script>
 {% endblock %}
 {% block content %}
-    <P>
-        <a href="{% url 'learning_logs:topic' topic.id %}">
-            <h2>{{ topic.name }}</h2>
-        </a>
-    </P>
     <label>Modify：</label>
     <form action="{% url 'learning_logs:edit_entry' entry.id %}" name="edit" method="post">
         {% csrf_token %}

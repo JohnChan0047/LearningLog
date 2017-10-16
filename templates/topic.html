@@ -2,25 +2,41 @@
 {% block title %}
     {{ topic }}
 {% endblock %}
+{% block custom_js %}
+    <style>
+        .panel{
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-    <p>
-        <h2>Topic: {{ topic.name }}</h2>
-    </p>
-    <p>
-        Entries:
-    </p>
-    <p>
-        <a href="{% url 'learning_logs:new_entry' topic.id %}">Add Entry</a>
-    </p>
-    <ul>
-        {% for entry in entries %}
-            <li>
-                <p>{{ entry.add_time|date:'M d, Y H:i' }}</p>
-                <p>{{ entry.text|linebreaks }}</p>
-                <P><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></P>
-            </li>
-        {% empty %}
-            <li>Not add anything yet.</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="{% url 'learning_logs:topic' topic.id %}">Topic: {{ topic.name }}</a></li>
+            <li role="presentation" ><a href="{% url 'learning_logs:new_entry' topic.id %}">Add Entry</a></li>
+        </ul>
+    </div>
+            {% for entry in entries %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ entry.add_time|date:'M d, Y H:i' }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ entry.text|linebreaks }}</p>
+                        <P><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></P>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">None</h3>
+                    </div>
+                    <div class="panel-body">
+                        Not add anything yet.
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+
 {% endblock %}

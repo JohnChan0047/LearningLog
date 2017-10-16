@@ -11,15 +11,21 @@ from apps.utils.mixin_utils import LoginRequiredMixin
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'index.html', {})
+        if request.user.is_authenticated:
+            topics = Topic.objects.filter(user=request.user).order_by('add_time')
+            return render(request, 'index.html', {
+                'topics': topics,
+            })
+        else:
+            return render(request, 'index.html', {})
 
 
-class TopicsView(LoginRequiredMixin, View):
-    def get(self, request):
-        topics = Topic.objects.filter(user=request.user).order_by('add_time')
-        return render(request, 'topics.html', {
-            'topics': topics,
-        })
+# class TopicsView(LoginRequiredMixin, View):
+#     def get(self, request):
+#         topics = Topic.objects.filter(user=request.user).order_by('add_time')
+#         return render(request, 'topics.html', {
+#             'topics': topics,
+#         })
 
 
 class TopicView(LoginRequiredMixin, View):
@@ -47,7 +53,7 @@ class AddNewTopicView(LoginRequiredMixin, View):
             new_topic = topic_form.save(commit=False)
             new_topic.user = request.user
             new_topic.save()
-            return HttpResponseRedirect(reverse('learning_logs:topics'))
+            return HttpResponseRedirect(reverse('learning_logs:index'))
         else:
             return render(request, 'new_topic.html', {
                 'topic_form': topic_form,

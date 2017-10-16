@@ -22,21 +22,25 @@
     </h2>
 {% endblock %}
 {% block content %}
-    <p>
-        <h3>
-            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-        </h3>
-    </p>
-    <form name="entry" action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
-        {% csrf_token %}
-        <p>
-            <label for="id_text">Entry:</label>
-            <textarea name="text" cols="120" rows="10" required="" id="id_text" class="form-control"></textarea>
-        </p>
-        <p>
-            <label>Add time:</label>
-            <p id="time1"></p>
-        </p>
-        <button name="submit" class="btn btn-primary">Add a new entry:</button>
-    </form>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ><a href="{% url 'learning_logs:topic' topic.id %}">Topic: {{ topic.name }}</a></li>
+                <li role="presentation" class="active"><a href="{% url 'learning_logs:new_entry' topic.id %}">Add Entry</a></li>
+            </ul>
+        </div>
+        <form name="entry" action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
+            {% csrf_token %}
+            <p>
+                <label for="id_text">Entry:</label>
+                <textarea name="text" cols="120" rows="10" required="" id="id_text" class="form-control"></textarea>
+            </p>
+            <p>
+                <label>Add time:</label>
+                <p id="time1"></p>
+            </p>
+            <button name="submit" class="btn btn-primary">Add a new entry:</button>
+        </form>
+    </div>
+
 {% endblock %}

@@ -7,6 +7,15 @@
         .form {
             width: 200px;
         }
+        body{
+            min-height: 700px;
+        }
+        #center{
+            height: 400px;
+        }
+    form{
+        margin-top: 10px;
+    }
     </style>
 {% endblock %}
 {% block header %}
@@ -15,13 +24,18 @@
     </h2>
 {% endblock %}
 {% block content %}
-    <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post">
-        {% csrf_token %}
-        <p>
-            <label >New Topic: </label>
-            <input class="form form-control" type="text" name="topic">
-        </p>
-{#        {{ topic_form.as_p }}#}
-        <button name="submit" class="btn btn-primary">add topic</button>
-    </form>
+    <div id="center">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" ><a href="{% url 'learning_logs:index' %}">Topics</a></li>
+            <li role="presentation" class="active"><a href="{% url 'learning_logs:new_topic' %}">Add topic</a></li>
+        </ul>
+        <form name="topic" action="{% url 'learning_logs:new_topic' %}" method="post">
+            {% csrf_token %}
+            <p>
+                <label >New Topic: </label>
+                <input class="form form-control" type="text" name="topic">
+            </p>
+            <button name="submit" class="btn btn-primary">add topic</button>
+        </form>
+    </div>
 {% endblock %}

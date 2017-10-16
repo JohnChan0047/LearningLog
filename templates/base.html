@@ -32,7 +32,13 @@
     <![endif]-->
     <style>
         .page-header{
-            margin-top: 80px;
+            margin-top: 70px;
+        }
+        .jumbotron{
+            height: 150px;
+        }
+        h1{
+            margin-top: -10px;
         }
     </style>
   {% block custom_js %}
@@ -55,9 +61,9 @@
           <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
-          </ul>
+{#          <ul class="nav navbar-nav">#}
+{#            <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>#}
+{#          </ul>#}
           <ul class="nav navbar-nav navbar-right">
               {% if request.user.is_authenticated %}
                 <li><a>Hello, {{ request.user }}!</a></li>
@@ -77,8 +83,9 @@
 
       <div class="page-header">
         <div>
-            {% block header %}
-            {% endblock %}
+            <div class="jumbotron">
+                <h1>Track your learning.</h1>
+            </div>
         </div>
         <div>
             {% block content %}
@@ -87,7 +94,11 @@
       </div>
 
     </div> <!-- /container -->
-
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

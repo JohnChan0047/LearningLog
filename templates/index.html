@@ -2,17 +2,49 @@
 {% block title %}
     主页
 {% endblock %}
-{% block header %}
-    <div class="jumbotron">
-        <h1>Track your learning.</h1>
-    </div>
+{% block custom_js %}
+    <style>
+        body{
+            min-height: 700px;
+        }
+        #center{
+            height: 400px;
+        }
+        .btn {
+            margin-top: 15px;
+        }
+    </style>
 {% endblock %}
 {% block content %}
-    <h2>
-        <a href="{% url 'user:register' %}">Register an account</a> to make your own Learning Log, and list the
-     topics you're learning about.
-    </h2>
-    <h2>
-        Whenever you learn something about a new topic, make an entry summarizing what you've learned.
-    </h2>
+    <div id="center">
+        {% if request.user.is_authenticated %}
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="{% url 'learning_logs:index' %}">Topics</a></li>
+                <li role="presentation" ><a href="{% url 'learning_logs:new_topic' %}">Add topic</a></li>
+            </ul>
+            <div class="topicbtn">
+                <p>
+                    {% for topic in topics %}
+                        <a class="btn btn-lg btn-primary" href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+                    {% empty %}
+                        <button type="button" class="btn btn-lg btn-primary">
+                            <li>Not add anything yet</li>
+                        </button>
+                    {% endfor %}
+
+                </p>
+            </div>
+
+        {% else %}
+            <div>
+                <h2>
+                    <a href="{% url 'user:register' %}">Register an account</a> to make your own Learning Log, and list the
+                 topics you're learning about.
+                </h2>
+                <h2>
+                    Whenever you learn something about a new topic, make an entry summarizing what you've learned.
+                </h2>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
