@@ -23,7 +23,7 @@ class Topic(models.Model):
 
 class Entry(models.Model):
     topic = models.ForeignKey(Topic, verbose_name='主题')
-    text = models.TextField(verbose_name='Entry')
+    text = models.CharField(verbose_name='Entry', max_length=1000)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='add time')
 
     class Meta:

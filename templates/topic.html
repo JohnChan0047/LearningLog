@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{#{% autoescape off %}#}
+{#{{infoContent}}#}
+{#{% endautoescape %}#}
 {% block title %}
     {{ topic }}
 {% endblock %}
@@ -23,7 +26,9 @@
                         <h3 class="panel-title">{{ entry.add_time|date:'M d, Y H:i' }}</h3>
                     </div>
                     <div class="panel-body">
-                        <p>{{ entry.text|linebreaks }}</p>
+
+{#                        <p>{{ entry.text|linebreaks }}</p>#}
+                        {{ entry.text|safe|linebreaks }}
                         <P><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></P>
                     </div>
                 </div>
