@@ -24,9 +24,11 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'y_b@8(zbyt!x_9e%dw)jf8vu2zfq3)gsd8z0ozxbca8k=d6xs)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = '/home/chenrubao/sites/learnlog/static'
 
 
 # Application definition
