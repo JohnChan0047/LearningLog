@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'learning_logs',
-    'xadmin',
-    'crispy_forms',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 

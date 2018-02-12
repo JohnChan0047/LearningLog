@@ -17,11 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
-import xadmin
 from apps.learning_logs.upload import upload_image
 
 urlpatterns = [
-    url(r'^xadmin/', xadmin.site.urls),
+    url(r'^admin/', admin.site.urls),
 
     # 配置主页显示的url
     url(r'', include('learning_logs.urls', namespace='learning_logs')),
